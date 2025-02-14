@@ -92,6 +92,8 @@ namespace Files.Shared.Helpers
 		/// <returns><c>true</c> if the fileExtensionToCheck is a zip bundle file; otherwise, <c>false</c>.</returns>
 		public static bool IsZipFile(string? fileExtensionToCheck)
 		{
+			if (HasExtension(fileExtensionToCheck, ".aria2", ".downloading", ".part", ".tmp", ".crdownload", ".partial", ".opdownload"))
+				return false;
 			return HasExtension(fileExtensionToCheck, ".zip", ".msix", ".appx", ".msixbundle", ".appxbundle", ".7z", ".rar", ".tar", ".mcpack", ".mcworld", ".mrpack", ".jar", ".gz", ".lzh");
 		}
 
@@ -101,6 +103,11 @@ namespace Files.Shared.Helpers
 			{
 				ext = null;
 
+				return false;
+			}
+			if (HasExtension(filePath, ".aria2", ".downloading", ".part", ".tmp", ".crdownload", ".partial", ".opdownload"))
+			{
+				ext = null;
 				return false;
 			}
 
